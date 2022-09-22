@@ -1,16 +1,16 @@
 $cash_box = {
-  '1'=>10, 
-  '2'=>10, 
-  '5c'=>10, 
-  '5'=>10, 
-  '10c'=>10,
-  '10'=>10,
-  '20'=>10,
-  '50'=>10, 
-  '100'=>10, 
-  '200'=>10, 
-  '500'=>10,  
-  '2000'=>10}
+  '1' => 10, 
+  '2' => 10, 
+  '5c' => 10, 
+  '5' => 10, 
+  '10c' => 10,
+  '10' => 10,
+  '20' => 10,
+  '50' => 10, 
+  '100' => 10, 
+  '200' => 10, 
+  '500' => 10,  
+  '2000' => 10}
 $denomination = [1,2,5,5,10,10,20,50,100,200,500,2000]
 $order_count = 0
 $initial_amount
@@ -41,11 +41,11 @@ def order_count_display()
     end
     $order_count += 1 
     puts "order number is #{$order_count}"
-    customer_amount(duplicate_cash_box)
+    customer_given_amount(duplicate_cash_box)
   end 
 end 
 
-def customer_amount(duplicate_cash_box)
+def customer_given_amount(duplicate_cash_box)
    puts "Enter the bill amount"
    bill_amount=gets().chomp.to_i
    puts "Enter the total amount given"
@@ -57,10 +57,10 @@ def customer_amount(duplicate_cash_box)
     puts("Insufficient balance")
     exit
    end 
-   transcation(bill_amount,balance_amount_to_customer,toatal_cash_by_customer,duplicate_cash_box)
+  credit_transcation(bill_amount,balance_amount_to_customer,toatal_cash_by_customer,duplicate_cash_box)
 end   
 
-def transcation(bill_amount,balance_amount_to_customer,toatal_cash_by_customer,duplicate_cash_box)
+def credit_transcation(bill_amount,balance_amount_to_customer,toatal_cash_by_customer,duplicate_cash_box)
   $initial_amount = initial_cashbox_total(false)
   total_money = 0
   while total_money < toatal_cash_by_customer 
@@ -131,11 +131,11 @@ def transcation(bill_amount,balance_amount_to_customer,toatal_cash_by_customer,d
       end
     end
   end
-   denomination(balance_amount_to_customer,bill_amount,duplicate_cash_box)
+  debit_denomination(balance_amount_to_customer,bill_amount,duplicate_cash_box)
 end
 
 
-def denomination(balance_amount_to_customer,bill_amount,duplicate_cash_box)
+def debit_denomination(balance_amount_to_customer,bill_amount,duplicate_cash_box)
     
   cashes = [2000,500,200,100,50,20,10,5,2,1]
   balance_cost = balance_amount_to_customer
@@ -195,10 +195,10 @@ def denomination(balance_amount_to_customer,bill_amount,duplicate_cash_box)
     cash_box_index += 1
   end
   puts(final_amount)
-  validation(final_amount,bill_amount,balance_amount_to_customer)
+  balance_validation(final_amount,bill_amount,balance_amount_to_customer)
 end
 
-def validation(final_amount,bill_amount,balance_amount_to_customer)
+def balance_validation(final_amount,bill_amount,balance_amount_to_customer)
     previous_initial = $initial_amount
     if initial_cashbox_total(false) - previous_initial  == bill_amount
         puts "balance is correct"
